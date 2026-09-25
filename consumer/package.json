@@ -1,0 +1,15 @@
+{
+  "name": "order-storage-kernel-v0.4-handoff-consumer",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "demo": "node demo.cjs"
+  },
+  "dependencies": {
+    "@monad-ac/order-storage-preview": "file:../order-storage-preview.tgz",
+    "ethers": "6.17.0",
+    "ganache": "7.9.2",
+    "solc": "0.8.30"
+  }
+}
+

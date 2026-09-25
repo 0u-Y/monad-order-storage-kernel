@@ -1,0 +1,27 @@
+{
+  "lockedAtUtc": "2026-09-25T07:22:17Z",
+  "status": "FROZEN_FOR_EXTERNAL_INTEGRATION_TRIAL",
+  "package": {
+    "name": "@monad-ac/order-storage-preview",
+    "version": "0.4.0-lots.0",
+    "file": "order-storage-preview.tgz",
+    "sha256": "4fa0bd18bc5846313351d6fb4d79d6317ec4b7309180b86afee4916ec1b5012b",
+    "kernelMember": "package/contracts/OrderStorageKernel.sol",
+    "kernelMemberSha256": "cce2e055fb84169e5d996c87edd99f116b3af60951f2ee48fd10aa74b630553e"
+  },
+  "referenceConsumerSha256": {
+    "consumer/package.json": "403e557b145604e779434ecd16129276235db88e84fea3222b67e2946052b2a9",
+    "consumer/demo.cjs": "5120f887b7a6d8346431afb1ab5111e4813fb2df3d5eccc069f7ab51f643d26a",
+    "consumer/contracts/DirectTakerEscrowOrderBookBase.sol": "364190d13fb29467424fd02f44311db0edd4d3bd01f8c76c69b4466febdbabd4",
+    "consumer/contracts/DirectTakerContiguousOrderBook.sol": "2918e33a49166e4943e532447ba4d2bd52b842aa60b643c817e07bf5aae73f7f",
+    "consumer/contracts/StrictMockERC20.sol": "8202d407c17a2f2beb1de69dc1d53e5267d00481ea4126f2043ce362f21d948b"
+  },
+  "compiler": {
+    "solc": "0.8.30+commit.73712a01.Emscripten.clang",
+    "optimizer": true,
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "shanghai"
+  },
+  "changePolicy": "Do not modify frozen sources before external feedback. Classify trial findings before proposing a patch."
+}

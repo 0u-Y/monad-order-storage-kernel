@@ -1,0 +1,40 @@
+{
+  "name": "OrderStorageKernel v0.4 developer handoff",
+  "status": "PUBLIC_INTEGRATION_TRIAL",
+  "publicRepository": "https://github.com/0u-Y/monad-order-storage-kernel",
+  "registryPackage": null,
+  "externalFeedback": "NOT_RUN",
+  "package": {
+    "name": "@monad-ac/order-storage-preview",
+    "version": "0.4.0-lots.0",
+    "tarball": "order-storage-preview.tgz",
+    "sha256": "4fa0bd18bc5846313351d6fb4d79d6317ec4b7309180b86afee4916ec1b5012b"
+  },
+  "compiler": {
+    "version": "0.8.30+commit.73712a01.Emscripten.clang",
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "shanghai",
+    "canonicalInputSha256": "46716cf343aee90a7869f9ab52a1d712578c027a25581e0f5eed153512d7ca96"
+  },
+  "consumerSha256": {
+    "consumer/demo.cjs": "5120f887b7a6d8346431afb1ab5111e4813fb2df3d5eccc069f7ab51f643d26a",
+    "consumer/contracts/DirectTakerContiguousOrderBook.sol": "2918e33a49166e4943e532447ba4d2bd52b842aa60b643c817e07bf5aae73f7f",
+    "consumer/contracts/DirectTakerEscrowOrderBookBase.sol": "364190d13fb29467424fd02f44311db0edd4d3bd01f8c76c69b4466febdbabd4",
+    "consumer/contracts/StrictMockERC20.sol": "8202d407c17a2f2beb1de69dc1d53e5267d00481ea4126f2043ce362f21d948b"
+  },
+  "testnetEvidence": {
+    "chainId": 10143,
+    "contiguousHost": "0x9BDd499Cd30D82815B444bDc435C03c3805E7010",
+    "hashedHost": "0xD5f40C8E8aA8329858Ba86FF756207c6aC3cfF97",
+    "status": "PASS_FULL"
+  },
+  "excluded": [
+    "encrypted keystore and password",
+    "signed raw transactions",
+    "node_modules",
+    "native build trees",
+    "C lifecycle code",
+    "experimental sharded allocator"
+  ]
+}
