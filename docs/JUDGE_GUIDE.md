@@ -74,10 +74,12 @@ public linked baseline with the same solc 0.8.30/optimizer-200/viaIR/Shanghai
 input. It executes five local differential fixtures against an independent JS
 queue/balance model, then uses read-only `eth_call`, `debug_traceCall`, and
 `eth_estimateGas` at chain 143 block `0x6592850`. It makes 63 RPC calls and no
-transactions in the recorded run. A warm-dependency run took about 160 seconds
-on the submission workstation; `benchmark/node_modules` occupied about 351 MB.
-Network transfer varies with the npm cache and is not reported as an exact
-download-byte claim. Generated raw files go to `benchmark/output/`.
+transactions in the recorded run. A clean GitHub clone with an empty isolated
+npm cache took 150 seconds on the submission workstation (Node 22.22.2, npm
+10.9.7, Linux x86-64). The resulting npm cache occupied 95,430,237 bytes and
+`benchmark/node_modules` occupied 350,700,652 bytes. Cache size is a reproducible
+download-footprint proxy, not an exact count of HTTP wire bytes. Generated raw
+files go to `benchmark/output/`.
 
 What that command verifies: matching public function selectors and event
 topics, maker-only cancellation, stale-handle rejection, calldata, exact-token
