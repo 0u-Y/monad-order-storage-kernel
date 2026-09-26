@@ -1,0 +1,25 @@
+{
+  "name": "monad-order-storage-kernel",
+  "version": "0.4.1",
+  "description": "Custody-free FIFO order-storage Solidity library with generation handles and bounded fill receipts",
+  "license": "MIT",
+  "private": true,
+  "files": [
+    "contracts",
+    "src",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "exports": {
+    "./order-ref": "./src/order-ref.cjs"
+  },
+  "scripts": {
+    "test": "node scripts/verify-source-lock.cjs && bash verify_and_run.sh && node test/kernel.cjs",
+    "test:source": "node scripts/verify-source-lock.cjs",
+    "pack:preview": "npm pack --ignore-scripts"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
