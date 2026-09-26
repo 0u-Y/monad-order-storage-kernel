@@ -36,8 +36,8 @@ cd monad-order-storage-kernel
 npm run judge
 ```
 
-Observed on a clean Linux clone on 2026-09-26: 16.63 seconds with network
-and npm cache available. Installation time varies by environment.
+Two clean Linux clones on 2026-09-26 completed in 16.63 and 17.45 seconds with
+network and npm cache available. Installation time varies by environment.
 
 The output walks through these asserted scenes rather than printing only a
 PASS marker:
@@ -63,8 +63,8 @@ Optional live, read-only testnet check:
 npm run replay:testnet
 ```
 
-The same clean clone completed this optional replay in 5.85 seconds; RPC
-availability and latency can change.
+Clean-clone optional replays completed in 5.40–5.85 seconds; RPC availability
+and latency can change.
 
 This checks chain 10143, nonempty code at the three recorded addresses, all 19
 receipt statuses and submitted limits, aggregate receipt gas fields and charge,
