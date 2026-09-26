@@ -1,0 +1,202 @@
+{
+  "schema": "metropolis-evidence-v1",
+  "scope": "OrderStorageKernel v0.4.1 and the separate eight-tick one-sided inventory reference",
+  "sourceIdentity": {
+    "publicCommitBeforeSubmissionDocs": "51bdd145518dc89f304c8aa3cdfa2147d21beb9f",
+    "kernelSha256": "cce2e055fb84169e5d996c87edd99f116b3af60951f2ee48fd10aa74b630553e",
+    "frozenPackageSha256": "4fa0bd18bc5846313351d6fb4d79d6317ec4b7309180b86afee4916ec1b5012b",
+    "multiPriceBaseSha256": "cdd20709810dbf2e37eb53950ef41ca88dd1aee26b770d5e5dcdf927a493efd2",
+    "multiPriceContiguousSha256": "af3c597c790c8317a2d6386179880ff53afe14724560cfee8d8efd53a6c26a96",
+    "linkedBaselineSha256": "287f86bf92ddda242c369837737c8b5f57b7c1e5df99e9b368f1f2b7d6ec2aec"
+  },
+  "compiler": {
+    "version": "0.8.30+commit.73712a01.Emscripten.clang",
+    "optimizer": true,
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "shanghai"
+  },
+  "fixedBlockReadOnly": {
+    "evidenceClass": "CHAIN_143_ETH_ESTIMATEGAS_AND_ETH_CALL_STATE_OVERRIDE",
+    "chainId": 143,
+    "blockNumber": "0x6592850",
+    "blockHash": "0xa582f09dc794ea690aeac2a76ed76af5d1e6fad9e116e0414376fafbf0c25360",
+    "blockTimestamp": 1789920318,
+    "fixture": {
+      "activeDepth": 64,
+      "baseDecimals": 18,
+      "quoteDecimals": 6,
+      "baseRawPerLot": "10000000000000000",
+      "ticks": [101, 102, 103, 104, 105, 106, 107, 108],
+      "quoteRawPerLot": [10000, 10200, 10400, 10600, 10800, 11000, 11200, 11400],
+      "minimumOrderLots": 2,
+      "minimumResidualLots": 2
+    },
+    "wholeHostComparisons": [
+      {
+        "id": "maker-two-tick-2plus2-active64",
+        "contiguousEstimate": 201446,
+        "linkedEstimate": 235022,
+        "contiguousSuggestedLimit": 232000,
+        "linkedSuggestedLimit": 271000,
+        "contiguousSavingsPercent": 14.28,
+        "sameLogicalPolicy": true
+      },
+      {
+        "id": "taker-5-fill-active33",
+        "contiguousEstimate": 359880,
+        "linkedEstimate": 393634,
+        "contiguousSuggestedLimit": 414000,
+        "linkedSuggestedLimit": 453000,
+        "contiguousSavingsPercent": 8.57,
+        "sameLogicalPolicy": true
+      },
+      {
+        "id": "taker-32-fill-active33",
+        "contiguousEstimate": 1094982,
+        "linkedEstimate": 1373872,
+        "contiguousSuggestedLimit": 1260000,
+        "linkedSuggestedLimit": 1580000,
+        "contiguousSavingsPercent": 20.29,
+        "sameLogicalPolicy": true
+      },
+      {
+        "id": "taker-1-fill-active33-counterexample",
+        "contiguousEstimate": 267063,
+        "linkedEstimate": 264428,
+        "contiguousSuggestedLimit": 308000,
+        "linkedSuggestedLimit": 305000,
+        "contiguousSavingsPercent": -0.99,
+        "sameLogicalPolicy": true
+      },
+      {
+        "id": "maker-two-tick-1plus1-active256-counterexample",
+        "contiguousEstimate": 184379,
+        "linkedEstimate": 179395,
+        "contiguousSuggestedLimit": 213000,
+        "linkedSuggestedLimit": 207000,
+        "contiguousSavingsPercent": -2.77,
+        "sameLogicalPolicy": true
+      }
+    ],
+    "limits": "Suggested limits passed eth_call only against their registered prestates. They are not receipts or universal safe limits."
+  },
+  "staleLimitCounterexamples": {
+    "evidenceClass": "CHAIN_143_READ_ONLY_STATE_TRANSITION",
+    "rows": [
+      {
+        "id": "split-one-10-lot-head-into-five-2-lot-heads",
+        "preflightEstimate": 268792,
+        "submittedLimitCandidate": 310000,
+        "inclusionStateRequiredGas": 359548,
+        "result": "OOG"
+      },
+      {
+        "id": "insert-five-cheap-heads-before-expensive-head",
+        "preflightEstimate": 280411,
+        "submittedLimitCandidate": 323000,
+        "inclusionStateRequiredGas": 359548,
+        "result": "OOG"
+      }
+    ]
+  },
+  "publicTestnetExecution": {
+    "evidenceClass": "CHAIN_10143_RECEIPTS_CONTIGUOUS_ONLY",
+    "chainId": 10143,
+    "host": "0xF33Fe3D722d2Df7E07c053E83EAe270d38aF8709",
+    "mockBase": "0x0a876472e0C136baf7DDb8b21C7c992E36ecd7B4",
+    "mockQuote": "0xD599C4a2C4599E2Eb46607A253a94d0F8AC96BD5",
+    "receiptCount": 19,
+    "successfulReceiptCount": 19,
+    "submittedGasLimitTotal": 7221000,
+    "receiptGasUsedDiagnosticTotal": 7221000,
+    "effectiveGasPriceWei": "102000000000",
+    "chargedWei": "736542000000000000",
+    "chargedMon": "0.736542",
+    "selectedReceipts": [
+      {
+        "label": "first multi-maker take",
+        "transactionHash": "0x7c9648ba3fff8bbbab75e5005cc1cb0812e8c64a7b99d0b0c55a3c48036dd287",
+        "estimate": 316924,
+        "submittedGasLimit": 365000,
+        "receiptGasUsed": 365000,
+        "effectiveGasPriceWei": "102000000000",
+        "chargedWei": "37230000000000000"
+      },
+      {
+        "label": "atomic two-tick refresh",
+        "transactionHash": "0xecf9de77eb8b22020fe9c1c036cd210f86b2395ba740f34d09996b09060ddf1f",
+        "estimate": 227866,
+        "submittedGasLimit": 263000,
+        "receiptGasUsed": 263000,
+        "effectiveGasPriceWei": "102000000000",
+        "chargedWei": "26826000000000000"
+      },
+      {
+        "label": "second take",
+        "transactionHash": "0xf2136afb217940ec16501e03aa539484ca85819e6a04e4c73cd213464ed6216c",
+        "estimate": 234336,
+        "submittedGasLimit": 270000,
+        "receiptGasUsed": 270000,
+        "effectiveGasPriceWei": "102000000000",
+        "chargedWei": "27540000000000000"
+      },
+      {
+        "label": "cancel and refund",
+        "transactionHash": "0xb5f16805a3f7aaac78d2be734769edb00747fc72e435852b490c4076623a5ada",
+        "estimate": 125687,
+        "submittedGasLimit": 145000,
+        "receiptGasUsed": 145000,
+        "effectiveGasPriceWei": "102000000000",
+        "chargedWei": "14790000000000000"
+      }
+    ],
+    "comparisonLimit": "No linked or hashed host was deployed in this testnet run; these receipts cannot establish onchain layout savings.",
+    "transactions": [
+      ["deploy-baseToken", "0x985a89c5c79c62cc05d6cf28bbf9cc918e8fae1e9d1c862431f3cc6a2fa1b606", 849000],
+      ["deploy-quoteToken", "0x6400ebe80edfa89b45f906baac0ccdd647ad2afa7c3b1b8a6b98ba1bb92f74ee", 849000],
+      ["deploy-contiguous", "0x1ca1420fb178595dde0b60d644f359d671746e3b60fab776ba84faa16441c63b", 3377000],
+      ["fund-makerA", "0x5486bcf9fcab2e5c13ded14e6c5916a33568f30f5c3cf0060a337afe60eb7e00", 25000],
+      ["fund-makerB", "0xe84bd96e04e07821ea92ec6411147e86105f15b22113b5fffaddabea38e7d4ba", 25000],
+      ["fund-taker", "0x2b4127a656da5a584313d88570bf3b71b5462df2d94c3b699de7c645e15b3632", 25000],
+      ["mint-base-a", "0x8fb515a202955505c1fe541afeadf7f0b9a9e1c565e985d9a593918732b62b46", 59000],
+      ["mint-base-b", "0xde248b80f61451770d0f9057a6084f35cef223109c228f4dcc4f385be47a2f6a", 59000],
+      ["mint-quote", "0xe3047662fb7d4fb45bdbad68088a12a043075f6f20b92be1fbf4a1988c0403af", 59000],
+      ["approve-a", "0x211e3cddbda64cf0492c71d0999226aa540ff70d845e115071c71c96d13fcf9c", 59000],
+      ["approve-b", "0x35a53356306bacd241045958de23cc4dbae42839000b6887fc4f9c9578955618", 59000],
+      ["approve-taker", "0xd127d7f47ae79e5e6c536a2c022d8f1f3383bc36e2c0cdce1d36267b62e27513", 59000],
+      ["post-a-high", "0x160532279b1408b6580e04870c54e1669ff50d3e799feb670e65ab4dbdf0c19d", 257000],
+      ["post-b-low", "0x8a4b71182eb616640b75e01240a2aa20d087ce0cb3f54f1f21587d7757923b39", 218000],
+      ["post-a-low", "0x3847ff335df58ef51b3659fe79027784a60cf38019ca42eb075697d6f8fe8108", 199000],
+      ["take-first", "0x7c9648ba3fff8bbbab75e5005cc1cb0812e8c64a7b99d0b0c55a3c48036dd287", 365000],
+      ["refresh-a", "0xecf9de77eb8b22020fe9c1c036cd210f86b2395ba740f34d09996b09060ddf1f", 263000],
+      ["take-second", "0xf2136afb217940ec16501e03aa539484ca85819e6a04e4c73cd213464ed6216c", 270000],
+      ["cancel-a", "0xb5f16805a3f7aaac78d2be734769edb00747fc72e435852b490c4076623a5ada", 145000]
+    ]
+  },
+  "researchProvenance": [
+    {
+      "path": "results/20260924T151451Z-multi-price-inventory/monad_results.json",
+      "sha256": "ee3b0b522369b90ea48a0a986a6cef33b77c9af02b0f11c2156469dee61ff1e9"
+    },
+    {
+      "path": "results/20260924T172504Z-multi-price-public-reference/adversarial_monad.json",
+      "sha256": "4d9a6efa6a2313781aa57bd24f75f80ef696dd9f8f49a32e4a6e4a3979960893"
+    },
+    {
+      "path": "results/20260924T172504Z-multi-price-public-reference/testnet_broadcast_manifest.json",
+      "sha256": "54a0ae6de861315678f580ce6b75586dd7b38082b1c11d3505c29349b1a658f0"
+    },
+    {
+      "path": "results/20260924T172504Z-multi-price-public-reference/testnet_replay.json",
+      "sha256": "c418c22a431d8eda864054fa492bc534382ce3d0f72f67990b40c680a14bdc6c"
+    }
+  ],
+  "notEvidence": [
+    "historical pre-MonadTen native timing",
+    "Kuru-relative performance",
+    "production custody readiness",
+    "external demand",
+    "page locality as the sole causal explanation"
+  ]
+}

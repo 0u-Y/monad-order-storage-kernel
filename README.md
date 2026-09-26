@@ -9,6 +9,9 @@ matcher, charge fees, or settle trades. Those policies belong to the importing
 host. The repository includes a reference host and mock assets to demonstrate
 that seam; it is not a production exchange or a CLOB.
 
+Metropolis submission: [five-minute case](docs/METROPOLIS_CASE.md) ·
+[claim-to-evidence map](docs/EVIDENCE_MAP.md)
+
 ## Status
 
 - Public source preview: `v0.4.1`
