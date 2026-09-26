@@ -63,7 +63,8 @@ The current executable demo performs these scenes:
    unchanged;
 6. maker A cancels the residual and receives its refund.
 
-Expected line: `METROPOLIS TWO-MINUTE DEMO PASS`.
+The command prints every scene's asserted handles, fill ordering, balances,
+rollback equality, and final escrow before `METROPOLIS TWO-MINUTE DEMO PASS`.
 
 No additional implementation is required for this local scene. The existing
 public testnet deployment contains the successful multi-price flow, but no
@@ -102,15 +103,17 @@ registered prestate:
 
 These are `eth_estimateGas` results plus separately recorded, same-prestate
 `eth_call` limit checks. They are not receipts or actual fee savings. The
-compact public evidence and calculation audit run with:
+compact public recorded-evidence audit runs with:
 
 ```bash
 npm run evidence:metropolis
 ```
 
-The full state-override RPC runner remains in the research repository; the
-public command verifies the selected raw rows, source hashes, calculations,
-and evidence classes, but does not regenerate the historical estimates.
+The full state-override RPC runner remains in the research repository. The
+public command verifies four source hashes, arithmetic over the selected stored
+rows, OOG inequalities, and recorded charge arithmetic. It does not regenerate
+the historical estimates or independently execute a semantic-equivalence test
+against the linked baseline.
 
 ### 3. The contiguous reference executed publicly with mock assets
 
@@ -124,9 +127,12 @@ conceptually distinct.
 npm run replay:testnet
 ```
 
-This read-only replay checks chain ID, deployed code, all 19 receipt statuses
-and limits, the charged amount, and final zero host escrow/balances. It does not
-compare linked onchain because only the contiguous host was deployed.
+This read-only replay checks chain ID, nonempty code at the host and token
+addresses, all 19 receipt statuses and submitted limits, aggregate receipt gas
+fields and charge, and current zero host locked BASE/BASE/QUOTE balances. It
+does not check runtime hashes, immutable tick configuration, event FIFO order,
+or historical actor balances. It does not compare linked onchain because only
+the contiguous host was deployed.
 
 - [host](https://testnet.monadscan.com/address/0xF33Fe3D722d2Df7E07c053E83EAe270d38aF8709)
 - [first multi-maker take](https://testnet.monadscan.com/tx/0x7c9648ba3fff8bbbab75e5005cc1cb0812e8c64a7b99d0b0c55a3c48036dd287)

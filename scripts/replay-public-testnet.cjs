@@ -45,9 +45,14 @@ const rpc = process.env.MONAD_TESTNET_RPC_URL || 'https://testnet-rpc.monad.xyz'
   assert.equal(await quote.balanceOf(row.host), 0n);
 
   console.log('PUBLIC TESTNET KEYLESS REPLAY PASS');
-  console.log(`receipts=${row.transactions.length}/${row.transactions.length}`);
+  console.log('checked=chain_id_10143');
+  console.log('checked=nonempty_code_at_host_base_quote (existence only; not runtime hash)');
+  console.log(`checked=receipt_status_and_submitted_limit ${row.transactions.length}/${row.transactions.length}`);
   console.log(`submitted_gas_limit_total=${submittedTotal}`);
+  console.log(`receipt_gas_used_diagnostic_total=${gasUsedTotal}`);
   console.log(`charged_wei=${chargedTotal}`);
+  console.log('checked=current_host_locked_base_base_balance_quote_balance_are_zero');
+  console.log('not_checked=runtime_hash,immutable_ticks,event_order,historical_actor_balances');
 })().catch(error => {
   console.error(error.stack || error);
   process.exit(1);

@@ -34,7 +34,9 @@ for (const row of testnet.selectedReceipts) {
   assert.equal(BigInt(row.submittedGasLimit) * BigInt(row.effectiveGasPriceWei), BigInt(row.chargedWei));
 }
 
-console.log('METROPOLIS EVIDENCE MAP PASS');
-console.log(`fixed_block_rows=${evidence.fixedBlockReadOnly.wholeHostComparisons.length}`);
-console.log(`stale_limit_counterexamples=${evidence.staleLimitCounterexamples.rows.length}`);
-console.log(`testnet_receipts=${testnet.successfulReceiptCount}/${testnet.receiptCount}`);
+console.log('METROPOLIS RECORDED EVIDENCE AUDIT PASS');
+console.log('checked=source_hashes,stored_row_arithmetic,stored_evidence_invariants');
+console.log(`recorded_fixed_block_rows=${evidence.fixedBlockReadOnly.wholeHostComparisons.length}`);
+console.log(`recorded_stale_limit_counterexamples=${evidence.staleLimitCounterexamples.rows.length}`);
+console.log(`recorded_testnet_receipts=${testnet.successfulReceiptCount}/${testnet.receiptCount}`);
+console.log('not_checked=historical_rpc_regeneration,linked_semantic_equivalence,testnet_chain_state');

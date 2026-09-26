@@ -16,6 +16,7 @@
   },
   "scripts": {
     "test": "node scripts/verify-source-lock.cjs && bash verify_and_run.sh && node test/kernel.cjs && node scripts/metropolis-demo.cjs && node scripts/verify-metropolis-evidence.cjs",
+    "judge": "node scripts/verify-source-lock.cjs && npm --prefix consumer install --ignore-scripts --no-audit --no-fund && node scripts/metropolis-demo.cjs && node scripts/verify-metropolis-evidence.cjs",
     "test:source": "node scripts/verify-source-lock.cjs",
     "demo:metropolis": "npm --prefix consumer install --ignore-scripts --no-audit --no-fund && node scripts/metropolis-demo.cjs",
     "evidence:metropolis": "node scripts/verify-metropolis-evidence.cjs",

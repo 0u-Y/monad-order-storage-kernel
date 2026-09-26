@@ -28,6 +28,10 @@ const artifact = (file, name) => output.contracts[file][name];
 const tokenArtifact = artifact('contracts/StrictMockERC20.sol', 'StrictMockERC20');
 const hostArtifact = artifact('contracts/ContiguousMultiPriceInventory.sol', 'ContiguousMultiPriceInventory');
 const json = value => JSON.stringify(value, (_, item) => typeof item === 'bigint' ? item.toString() : item, 2);
+const line = (scene, assertion, observed) => {
+  console.log(`\n[${scene}] ${assertion}`);
+  console.log(`  observed: ${observed}`);
+};
 async function sent(value) { return (await value).wait(); }
 async function reverts(call) {
   try {
@@ -75,10 +79,26 @@ const orderSnapshot = row => ({maker: row.maker, lots: row.lots, priceTick: row.
   await sent(host.connect(makerB).post(marketId, 101, 3));
   const lowA = await host.connect(makerA).post.staticCall(marketId, 101, 5);
   await sent(host.connect(makerA).post(marketId, 101, 5));
+  line(
+    '1/7 POST',
+    'maker A and B escrow BASE and create orders at ticks 101 and 102',
+    `A@102=${high}; B@101=${lowB}; A@101=${lowA}`
+  );
 
   const replacements = await host.connect(makerA).refresh.staticCall(marketId, [high, lowA], [103, 101], [3, 4]);
   await sent(host.connect(makerA).refresh(marketId, [high, lowA], [103, 101], [3, 4]));
-  assert.equal(await reverts(() => host.connect(makerA).cancel(marketId, lowA)), true, 'old generation remained live');
+  line(
+    '2/7 ATOMIC REFRESH',
+    'maker A cancels two handles and reposts across two ticks in one transaction',
+    `old=[${high}, ${lowA}]; new=[${replacements[0]}, ${replacements[1]}]`
+  );
+  const staleRejected = await reverts(() => host.connect(makerA).cancel(marketId, lowA));
+  assert.equal(staleRejected, true, 'old generation remained live');
+  line(
+    '3/7 GENERATION HANDLE',
+    'the reused index has a new generation and the old handle is stale',
+    `old=${lowA}; replacement=${replacements[1]}; stale_cancel_reverted=${staleRejected}`
+  );
 
   const expectedQuote = 3n * 10000n + 4n * 10000n + 1n * 10400n;
   const fills = await host.connect(taker).take.staticCall(marketId, 8, 3, expectedQuote, 8, ethers.MaxUint256);
@@ -88,6 +108,11 @@ const orderSnapshot = row => ({maker: row.maker, lots: row.lots, priceTick: row.
     [103n, makerAAddress, 1n, 2n]
   ]);
   await sent(host.connect(taker).take(marketId, 8, 3, expectedQuote, 8, ethers.MaxUint256));
+  line(
+    '4/7 BOUNDED FILLS',
+    'cheapest tick first, FIFO within tick 101, then tick 103; maxFills=3',
+    fills.map((row, i) => `#${i + 1} tick=${row.priceTick} maker=${row.maker} lots=${row.lots} remaining=${row.remainingLots}`).join('\n            ')
+  );
 
   const balancesAfterTake = {
     makerABase: await base.balanceOf(makerAAddress),
@@ -105,6 +130,11 @@ const orderSnapshot = row => ({maker: row.maker, lots: row.lots, priceTick: row.
   assert.equal(balancesAfterTake.takerBase, 8n * baseRawPerLot);
   assert.equal(balancesAfterTake.hostQuote, 0n);
   assert.equal(balancesAfterTake.lockedBase, 2n * baseRawPerLot);
+  line(
+    '5/7 SAME-TX SETTLEMENT',
+    'Fill[] drives exact maker QUOTE payments and taker BASE receipt in the take transaction',
+    `makerA_quote=${balancesAfterTake.makerAQuote}; makerB_quote=${balancesAfterTake.makerBQuote}; taker_base=${balancesAfterTake.takerBase}; host_quote=${balancesAfterTake.hostQuote}; locked_base=${balancesAfterTake.lockedBase}`
+  );
 
   await sent(base.configureFailure(takerAddress));
   const beforeFailure = {
@@ -127,13 +157,23 @@ const orderSnapshot = row => ({maker: row.maker, lots: row.lots, priceTick: row.
     lockedBase: await host.lockedBaseRaw()
   };
   assert.deepEqual(afterFailure, beforeFailure, 'failed final payment did not roll back every state delta');
+  line(
+    '6/7 ROLLBACK INJECTION (LOCAL ONLY)',
+    'late BASE transfer failure restores the order, balances, host assets, and escrow snapshot',
+    `reverted=true; snapshots_equal=${json(afterFailure) === json(beforeFailure)}`
+  );
 
   await sent(host.connect(makerA).cancel(marketId, replacements[0]));
   assert.equal(await host.lockedBaseRaw(), 0n);
   assert.equal(await base.balanceOf(hostAddress), 0n);
   assert.equal(await quote.balanceOf(hostAddress), 0n);
+  line(
+    '7/7 CANCEL / REFUND',
+    'maker A cancels the residual and the reference host retains no BASE, QUOTE, or locked escrow',
+    'locked_base=0; host_base=0; host_quote=0'
+  );
 
-  console.log('METROPOLIS TWO-MINUTE DEMO PASS');
+  console.log('\nMETROPOLIS TWO-MINUTE DEMO PASS');
   console.log(json({
     scope: 'one-sided BASE inventory; eight configured ticks; not a CLOB',
     marketId,

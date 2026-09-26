@@ -9,7 +9,8 @@ matcher, charge fees, or settle trades. Those policies belong to the importing
 host. The repository includes a reference host and mock assets to demonstrate
 that seam; it is not a production exchange or a CLOB.
 
-Metropolis submission: [five-minute case](docs/METROPOLIS_CASE.md) ·
+Metropolis submission: **[two-minute judge guide](docs/JUDGE_GUIDE.md)** ·
+[five-minute case](docs/METROPOLIS_CASE.md) ·
 [claim-to-evidence map](docs/EVIDENCE_MAP.md)
 
 ## Status
@@ -22,7 +23,7 @@ Metropolis submission: [five-minute case](docs/METROPOLIS_CASE.md) ·
 - Default allocator: contiguous/global
 - Experimental sharded allocator: not included in this product repository
 
-## Five-minute check
+## Two-minute judge check
 
 Requirements: Node.js 20+, npm, `tar`, and `sha256sum`. No key, RPC, Docker, or
 Foundry is required.
@@ -30,21 +31,26 @@ Foundry is required.
 ```bash
 git clone https://github.com/0u-Y/monad-order-storage-kernel.git
 cd monad-order-storage-kernel
-npm test
+npm run judge
 ```
 
 Expected terminal lines:
 
 ```text
 SOURCE DISTRIBUTION PASS
-ORDER STORAGE HANDOFF DEMO PASS
-INTEGRATOR KIT PASS
-KERNEL INVARIANT SMOKE PASS
+METROPOLIS TWO-MINUTE DEMO PASS
+METROPOLIS RECORDED EVIDENCE AUDIT PASS
 ```
 
-The test deploys mock BASE18/QUOTE6 and a reference host to an ephemeral local
-chain, posts two makers in FIFO order, consumes across both, cancels the
-residual, and checks allowances, balances, escrow, and the empty queue.
+The command installs only the locked `consumer/` dependencies; there is no root
+`package-lock.json`, so no root `npm ci` is required. It prints the observed
+post, atomic refresh, generation change, three ordered fills, maker settlement,
+injected rollback, and cancel/refund values. The final evidence audit verifies
+stored hashes and arithmetic; it does not regenerate historical RPC estimates.
+
+Run the larger local regression with `npm test`. Run the optional current,
+read-only testnet receipt check with `npm run replay:testnet`. See the
+[judge guide](docs/JUDGE_GUIDE.md) for each command's exact assertion boundary.
 
 ## Use from Solidity
 
