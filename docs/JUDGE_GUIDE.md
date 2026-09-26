@@ -81,6 +81,15 @@ npm cache took 150 seconds on the submission workstation (Node 22.22.2, npm
 download-footprint proxy, not an exact count of HTTP wire bytes. Generated raw
 files go to `benchmark/output/`.
 
+The default endpoint is the unauthenticated public `https://rpc.monad.xyz`;
+set `MONAD_RPC_URL` to another chain-143 archival endpoint if needed. The
+endpoint must retain the pinned block and support `debug_traceCall` with a
+prestate tracer and state overrides. Missing historical state or an unsupported
+method is a blocker, not permission to substitute stored values. The runner
+allowlists only `eth_chainId`, `eth_getBlockByNumber`, `debug_traceCall`,
+`eth_call`, and `eth_estimateGas`; it has no broadcast path. Dependency install
+uses `benchmark/package-lock.json` with lifecycle scripts disabled.
+
 What that command verifies: matching public function selectors and event
 topics, maker-only cancellation, stale-handle rejection, calldata, exact-token
 balance/allowance deltas, host events, bounded fills, and final FIFO state for
@@ -90,7 +99,11 @@ ABI argument labels for `KernelOrderConsumed`, so the comparison normalizes its
 identical topic and positional values. What it does not verify: minimum
 successful gas, a submitted transaction, a receipt or fee, arbitrary tokens,
 Kuru-relative performance, TPS, page locality as the sole cause, or a universal
-safe limit.
+safe limit. The JS oracle is independently implemented from the Solidity queue
+but self-authored; it is not an external audit. Any assertion mismatch exits
+nonzero. Estimates are recorded rather than forced to match an old node result;
+the one-gas variation below is therefore visible instead of treated as success
+or failure.
 
 Optional live, read-only testnet check:
 

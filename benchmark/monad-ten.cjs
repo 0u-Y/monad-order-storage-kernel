@@ -11,6 +11,7 @@ const {CONFIG, FIXED_BLOCK, EXPECTED_SOLC, SETTINGS, compile, hostArgs, json, sa
 const MARKET = CONFIG.marketId;
 const RPC_URL = process.env.MONAD_RPC_URL || 'https://rpc.monad.xyz';
 const REQUEST_CAP = Math.min(Number(process.env.BENCHMARK_RPC_CAP || 100), 100);
+const ALLOWED_RPC_METHODS = new Set(['eth_chainId', 'eth_getBlockByNumber', 'debug_traceCall', 'eth_call', 'eth_estimateGas']);
 const A = {
   base: '0x000000000000000000000000000000000000ba5e',
   quote: '0x000000000000000000000000000000000000a05d',
@@ -31,6 +32,7 @@ let callCount = 0;
 const raw = [];
 
 async function rpc(method, params, label) {
+  assert.ok(ALLOWED_RPC_METHODS.has(method), `RPC method is not read-only allowlisted: ${method}`);
   if (++callCount > REQUEST_CAP) throw new Error(`RPC request cap exceeded: ${REQUEST_CAP}`);
   const request = {jsonrpc: '2.0', id: callCount, method, params};
   let response;

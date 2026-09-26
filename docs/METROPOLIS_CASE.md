@@ -90,8 +90,8 @@ audit or arbitrary ERC-20 proof.
 
 ### 2. Selected multi-order states had lower read-only estimates than linked
 
-At Monad chain 143 block `0x6592850`, with the same eight-tick host policy and
-registered prestate:
+The original recorded results at Monad chain 143 block `0x6592850`, with the
+same eight-tick host policy and registered prestate, were:
 
 | Whole-host workload | contiguous estimate | linked estimate | difference |
 |---|---:|---:|---:|
@@ -109,11 +109,15 @@ compact public recorded-evidence audit runs with:
 npm run evidence:metropolis
 ```
 
-The full state-override RPC runner remains in the research repository. The
-public command verifies four source hashes, arithmetic over the selected stored
-rows, OOG inequalities, and recorded charge arithmetic. It does not regenerate
-the historical estimates or independently execute a semantic-equivalence test
-against the linked baseline.
+That compact audit verifies four source hashes, arithmetic over the selected
+stored rows, OOG inequalities, and recorded charge arithmetic. It does not
+regenerate the historical estimates or execute a semantic-equivalence test.
+
+The public reproducer is `npm run benchmark:judge`. It first runs local
+differential assertions, then regenerates the fixed-block read-only calls. Its
+2026-09-26 run returned 235,023 rather than the original 235,022 for the linked
+2+2 row; the other four estimates matched. Both values remain as separate node
+results.
 
 ### 3. The contiguous reference executed publicly with mock assets
 
