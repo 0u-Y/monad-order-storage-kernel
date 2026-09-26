@@ -12,9 +12,10 @@ atomically before the transaction ends.
 A venue with resting maker inventory repeatedly has to link orders at each
 price, preserve FIFO, cancel arbitrary maker orders, reuse storage without
 reviving stale identifiers, and tell settlement exactly which makers were
-filled. The kernel owns only that state machine. The separate eight-tick
-reference owns mock-token escrow, cheapest-price traversal, lot conversion,
-and settlement. A production venue must still own authentication, custody,
+filled. The kernel owns only that state machine. The separate eight-tick,
+ask-only BASE inventory reference owns mock-token escrow, lowest-quote-price
+traversal, lot conversion, and settlement. A production venue must still own
+authentication, custody,
 fees, risk controls, recovery, indexing, and its gas policy.
 
 The technical seam is synchronous `Fill[]`: the host receives each `handle`,
@@ -38,6 +39,11 @@ npm run judge
 
 Two clean Linux clones on 2026-09-26 completed in 16.63 and 17.45 seconds with
 network and npm cache available. Installation time varies by environment.
+
+The command compiles with solc 0.8.30, optimizer 200, viaIR, and Shanghai,
+then runs the contracts on an in-process Ganache EVM. Its final markers are
+`METROPOLIS TWO-MINUTE DEMO PASS` and
+`METROPOLIS RECORDED EVIDENCE AUDIT PASS`.
 
 The output walks through these asserted scenes rather than printing only a
 PASS marker:
@@ -68,10 +74,10 @@ and latency can change.
 
 This checks chain 10143, nonempty code at the three recorded addresses, all 19
 receipt statuses and submitted limits, aggregate receipt gas fields and charge,
-and the host's current zero locked BASE/BASE/QUOTE balances. It does not check
+and the host's current zero `lockedBaseRaw`, BASE balance, and QUOTE balance.
+It does not check
 runtime bytecode hashes, immutable ticks, event FIFO order, or historical actor
-balances. Earlier research replay covered more fields; this public command's
-claim is deliberately narrower.
+balances. This public command's claim is deliberately narrow.
 
 ## How it works
 
@@ -82,15 +88,25 @@ claim is deliberately narrower.
 - A handle is `generation:uint64 || index:uint32`; reuse increments generation,
   so a stale handle cannot address the new order.
 - `consumeUpToWithFills` bounds synchronous work and returns the records needed
-  by host settlement. The reference host additionally caps `maxFills` at 32.
+  by host settlement. It can return partial progress at the bound; the host
+  enforces its minimum-received guard. The reference host uses integer lots,
+  caps `maxFills` at 32, and rejects a nonzero remainder below two lots.
+
+The kernel accepts a maker argument but does not authenticate callers. The
+reference host derives the maker from `msg.sender`, applies a reentrancy guard,
+mutates the queue first, then makes settlement transfers; any later revert in
+that EVM transaction restores both state and transfers. Cancel/repost loses
+the old FIFO position and appends the replacement at its level tail.
 
 This design is not proven faster because of page locality, and historical
 native results are not current MonadTen TPS evidence.
 
 ## What the evidence says, including losses
 
-The comparison rows below are recorded chain-143 `eth_estimateGas` results at
-block `0x6592850`. The public audit command verifies source hashes and stored
+The comparison rows below are recorded Monad mainnet chain-143
+`eth_estimateGas` results at block `0x6592850`, using solc 0.8.30, optimizer
+200, viaIR, and Shanghai. `active` means live orders immediately before the
+measured call. The public audit command verifies source hashes and stored
 arithmetic; it does not regenerate the remote state override.
 
 | Whole-host fixture | contiguous estimate | linked estimate | result |
@@ -116,7 +132,7 @@ Monad evidence terms remain separate:
 - **suggested/submitted limit:** transaction limit chosen by a client;
 - **receipt `gasUsed`:** a receipt field;
 - **charge:** submitted gas limit multiplied by effective gas price under the
-  documented Monad fee model.
+  [official Monad fee model](https://docs.monad.xyz/developer-essentials/gas-pricing).
 
 A lower estimate is not itself a lower fee. Equal submitted limits at equal
 gas price produce equal charges.
@@ -134,6 +150,11 @@ gas price produce equal charges.
 The public deployment is contiguous-only and uses mock assets. It proves the
 reference flow executed, not linked onchain savings, production custody,
 external demand, or audit readiness.
+
+Detailed types, errors, overflow behavior, and namespace rules are in the
+[API reference](API.md); host and threat boundaries are in
+[`SECURITY.md`](../SECURITY.md). The local demo and comparison fixtures remain
+self-authored evidence, not an independent audit.
 
 ## Claim matrix: what each public command actually verifies
 
