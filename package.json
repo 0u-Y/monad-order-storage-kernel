@@ -21,6 +21,7 @@
     "demo:metropolis": "npm --prefix consumer install --ignore-scripts --no-audit --no-fund && node scripts/metropolis-demo.cjs",
     "evidence:metropolis": "node scripts/verify-metropolis-evidence.cjs",
     "replay:testnet": "npm --prefix consumer install --ignore-scripts --no-audit --no-fund && node scripts/replay-public-testnet.cjs",
+    "benchmark:judge": "bash scripts/run-judge-benchmark.sh",
     "pack:preview": "npm pack --ignore-scripts"
   },
   "engines": {

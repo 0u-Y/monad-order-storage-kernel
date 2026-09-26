@@ -61,7 +61,34 @@ PASS marker:
 
 The final evidence step checks hashes and arithmetic in the frozen public JSON.
 It does **not** rerun the historical mainnet RPC fixture or independently prove
-the linked baseline semantically equivalent.
+the linked baseline semantically equivalent. That slower check is deliberately
+separate:
+
+```bash
+npm run benchmark:judge
+```
+
+Run `npm run judge` first for the product flow, then the benchmark only if the
+comparison claim matters. The benchmark compiles the contiguous host and the
+public linked baseline with the same solc 0.8.30/optimizer-200/viaIR/Shanghai
+input. It executes five local differential fixtures against an independent JS
+queue/balance model, then uses read-only `eth_call`, `debug_traceCall`, and
+`eth_estimateGas` at chain 143 block `0x6592850`. It makes 63 RPC calls and no
+transactions in the recorded run. A warm-dependency run took about 160 seconds
+on the submission workstation; `benchmark/node_modules` occupied about 351 MB.
+Network transfer varies with the npm cache and is not reported as an exact
+download-byte claim. Generated raw files go to `benchmark/output/`.
+
+What that command verifies: matching public function selectors and event
+topics, maker-only cancellation, stale-handle rejection, calldata, exact-token
+balance/allowance deltas, host events, bounded fills, and final FIFO state for
+the five named fixtures; same-prestate suggested-limit execution; and one
+stale-preflight OOG counterexample. The frozen linked event uses different JSON
+ABI argument labels for `KernelOrderConsumed`, so the comparison normalizes its
+identical topic and positional values. What it does not verify: minimum
+successful gas, a submitted transaction, a receipt or fee, arbitrary tokens,
+Kuru-relative performance, TPS, page locality as the sole cause, or a universal
+safe limit.
 
 Optional live, read-only testnet check:
 
@@ -103,24 +130,25 @@ native results are not current MonadTen TPS evidence.
 
 ## What the evidence says, including losses
 
-The comparison rows below are recorded Monad mainnet chain-143
+The comparison rows below are reproducible Monad mainnet chain-143
 `eth_estimateGas` results at block `0x6592850`, using solc 0.8.30, optimizer
 200, viaIR, and Shanghai. `active` means live orders immediately before the
-measured call. The public audit command verifies source hashes and stored
-arithmetic; it does not regenerate the remote state override.
+measured call. `npm run benchmark:judge` now regenerates the explicit state
+overrides and calls; `npm run evidence:metropolis` still checks only the stored
+hashes and arithmetic.
 
 | Whole-host fixture | contiguous estimate | linked estimate | result |
 |---|---:|---:|---|
-| maker two-tick 2+2, active 64 | 201,446 | 235,022 | 14.28% lower |
+| maker two-tick 2+2, active 64 | 201,446 | 235,023 | 14.28% lower |
 | taker 5 fills, active 33 | 359,880 | 393,634 | 8.57% lower |
 | taker 32 fills, active 33 | 1,094,982 | 1,373,872 | 20.29% lower |
 | taker 1 fill, active 33 | 267,063 | 264,428 | **0.99% higher** |
 | maker two-tick 1+1, active 256 | 184,379 | 179,395 | **2.77% higher** |
 
-The linked source is public and the research fixture intended the same host
-policy, but `npm run evidence:metropolis` does not execute a differential
-linked correctness test. Treat semantic equivalence as historical research
-provenance, not a fresh public-command assertion.
+The 2026-09-26 rerun changed the linked 2+2 estimate from the historical
+235,022 to 235,023; all other estimates above matched the frozen record. An
+estimate is a node result, not receipt gas, so both values are retained rather
+than edited to agree. Local differential assertions passed all five fixtures.
 
 Two recorded state changes also broke limits derived from preflight estimate
 plus 15%: limits 310,000 and 323,000 each needed 359,548 gas after the book
@@ -163,6 +191,7 @@ self-authored evidence, not an independent audit.
 | Frozen kernel/package identity | `npm run test:source` | tarball hash, unpacked kernel hash, public source hash and packaged file lock | audit, provenance outside recorded artifact |
 | FIFO/generation/`Fill[]`/rollback through reference host | `npm run judge` | local contract calls, exact fill order and values, balances, escrow, stale rejection, injected rollback, source hashes, stored evidence arithmetic | arbitrary ERC-20, production security, external integration |
 | Recorded fixed-block comparison and counterexamples are internally consistent | `npm run evidence:metropolis` | four source hashes, stored percentage arithmetic, OOG inequalities, recorded charge arithmetic | historical RPC regeneration, linked semantic equivalence, current chain state |
+| Five functional-equivalence fixtures and current pinned-block estimates | `npm run benchmark:judge` | wire ABI selectors/topics, auth rejection, exact-token deltas, events, JS FIFO/balance model, calldata/prestate, fixed-block read-only estimates, same-state suggested limits, stale-limit OOG | minimum gas search, receipts/fees, arbitrary ERC-20, independent audit, universal limit |
 | Historical public deployment still has accessible successful receipts | `npm run replay:testnet` | chain ID, nonempty code, 19 statuses and limits, aggregate gas/charge, current zero host balances | runtime hash, constructor immutables, event order, historical actor balances, linked comparison |
 
 ## Limits a judge should remember

@@ -52,6 +52,19 @@ Run the larger local regression with `npm test`. Run the optional current,
 read-only testnet receipt check with `npm run replay:testnet`. See the
 [judge guide](docs/JUDGE_GUIDE.md) for each command's exact assertion boundary.
 
+To reproduce the five contiguous-versus-linked comparison fixtures, including
+both regressions and the stale-limit counterexample, run:
+
+```bash
+npm run benchmark:judge
+```
+
+This slower optional command installs its separately locked benchmark
+dependencies, runs local differential assertions, then makes read-only calls at
+the pinned Monad mainnet block. It sends no transaction. Raw output is written
+under `benchmark/output/`; see the judge guide for metric definitions and the
+current recorded snapshot.
+
 ## Use from Solidity
 
 Pin the repository commit in your dependency process, then import:

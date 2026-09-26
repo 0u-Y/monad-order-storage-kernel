@@ -1,0 +1,169 @@
+{
+  "status": "PASS",
+  "frozenIdentity": {
+    "packageSha256": "4fa0bd18bc5846313351d6fb4d79d6317ec4b7309180b86afee4916ec1b5012b",
+    "kernelSha256": "cce2e055fb84169e5d996c87edd99f116b3af60951f2ee48fd10aa74b630553e"
+  },
+  "audits": {
+    "sourceDistribution": "SOURCE DISTRIBUTION PASS\npackage_sha256=4fa0bd18bc5846313351d6fb4d79d6317ec4b7309180b86afee4916ec1b5012b\nkernel_sha256=cce2e055fb84169e5d996c87edd99f116b3af60951f2ee48fd10aa74b630553e",
+    "recordedEvidence": "METROPOLIS RECORDED EVIDENCE AUDIT PASS\nchecked=source_hashes,stored_row_arithmetic,stored_evidence_invariants\nrecorded_fixed_block_rows=5\nrecorded_stale_limit_counterexamples=2\nrecorded_testnet_receipts=19/19\nnot_checked=historical_rpc_regeneration,linked_semantic_equivalence,testnet_chain_state",
+    "recordedTestnetReceiptRegression": "19/19 stored receipt invariants audited; live chain replay not part of this command"
+  },
+  "localEquivalence": [
+    {
+      "id": "maker-refresh-2+2-active64",
+      "status": "PASS",
+      "compared": [
+        "ABI",
+        "authorization",
+        "token balances and allowances",
+        "host events",
+        "final FIFO/model state"
+      ]
+    },
+    {
+      "id": "taker-1-fill-active33",
+      "status": "PASS",
+      "compared": [
+        "ABI",
+        "authorization",
+        "token balances and allowances",
+        "host events",
+        "final FIFO/model state"
+      ]
+    },
+    {
+      "id": "taker-5-fill-active33",
+      "status": "PASS",
+      "compared": [
+        "ABI",
+        "authorization",
+        "token balances and allowances",
+        "host events",
+        "final FIFO/model state"
+      ]
+    },
+    {
+      "id": "taker-32-fill-active33",
+      "status": "PASS",
+      "compared": [
+        "ABI",
+        "authorization",
+        "token balances and allowances",
+        "host events",
+        "final FIFO/model state"
+      ]
+    },
+    {
+      "id": "maker-refresh-1+1-active256",
+      "status": "PASS",
+      "compared": [
+        "ABI",
+        "authorization",
+        "token balances and allowances",
+        "host events",
+        "final FIFO/model state"
+      ]
+    }
+  ],
+  "monadTen": {
+    "status": "PASS_READ_ONLY_MONAD_TEN",
+    "block": {
+      "chainId": 143,
+      "number": "0x6592850",
+      "hash": "0xa582f09dc794ea690aeac2a76ed76af5d1e6fad9e116e0414376fafbf0c25360",
+      "timestamp": 1789920318
+    },
+    "rpcAccounting": {
+      "requests": 63,
+      "cap": 100,
+      "transactionsSent": 0
+    }
+  },
+  "table": [
+    {
+      "fixture": "maker-refresh-2+2-active64",
+      "equivalence": "PASS",
+      "contiguousEstimate": "201446",
+      "linkedEstimate": "235023",
+      "contiguousVsLinkedPercent": -14.28,
+      "result": "CONTIGUOUS_LOWER",
+      "suggestedLimits": "232000/271000",
+      "previousRecordedEstimate": "201446/235022",
+      "changedFromRecorded": true
+    },
+    {
+      "fixture": "maker-refresh-1+1-active256",
+      "equivalence": "PASS",
+      "contiguousEstimate": "184379",
+      "linkedEstimate": "179395",
+      "contiguousVsLinkedPercent": 2.77,
+      "result": "CONTIGUOUS_HIGHER",
+      "suggestedLimits": "213000/207000",
+      "previousRecordedEstimate": "184379/179395",
+      "changedFromRecorded": false
+    },
+    {
+      "fixture": "taker-1-fill-active33",
+      "equivalence": "PASS",
+      "contiguousEstimate": "267063",
+      "linkedEstimate": "264428",
+      "contiguousVsLinkedPercent": 0.99,
+      "result": "CONTIGUOUS_HIGHER",
+      "suggestedLimits": "308000/305000",
+      "previousRecordedEstimate": "267063/264428",
+      "changedFromRecorded": false
+    },
+    {
+      "fixture": "taker-5-fill-active33",
+      "equivalence": "PASS",
+      "contiguousEstimate": "359880",
+      "linkedEstimate": "393634",
+      "contiguousVsLinkedPercent": -8.57,
+      "result": "CONTIGUOUS_LOWER",
+      "suggestedLimits": "414000/453000",
+      "previousRecordedEstimate": "359880/393634",
+      "changedFromRecorded": false
+    },
+    {
+      "fixture": "taker-32-fill-active33",
+      "equivalence": "PASS",
+      "contiguousEstimate": "1094982",
+      "linkedEstimate": "1373872",
+      "contiguousVsLinkedPercent": -20.29,
+      "result": "CONTIGUOUS_LOWER",
+      "suggestedLimits": "1260000/1580000",
+      "previousRecordedEstimate": "1094982/1373872",
+      "changedFromRecorded": false
+    }
+  ],
+  "staleCounterexample": {
+    "id": "stale-preflight-split-head",
+    "kind": "contiguous",
+    "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000018e70000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000006ab0124e",
+    "quotedPrestateSha256": "f353476bf00ffea02bff03bd4bfa38c8a2329bce5d542a2f6b95138ed8cc6b7c",
+    "inclusionPrestateSha256": "7800bee218499a1e67f060679e65d27618859e173749e5d787c5ab844c4b5a23",
+    "quotedEstimate": "268792",
+    "quotedSuggestedLimit": "310000",
+    "oldLimitSucceededAfterBookChange": false,
+    "oldLimitError": "out of gas",
+    "changedStateEstimate": "359548",
+    "stateChanged": true
+  },
+  "metricBoundary": {
+    "estimate": "read-only eth_estimateGas at the pinned block and explicit state override",
+    "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+    "suggestedLimit": "15%-buffered rounded limit validated only at the identical prestate",
+    "actualSubmittedLimit": "N/A_NO_TRANSACTION",
+    "receiptFee": "N/A_NO_TRANSACTION"
+  },
+  "dependencyBytes": "350700652",
+  "durationMs": 156325,
+  "notClaimed": [
+    "page locality as sole cause",
+    "Kuru advantage",
+    "TPS",
+    "actual transaction fee savings",
+    "universal safe gas limit"
+  ]
+}

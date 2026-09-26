@@ -1,0 +1,310 @@
+{
+  "status": "PASS_READ_ONLY_MONAD_TEN",
+  "evidenceClass": "CHAIN_143_FIXED_BLOCK_ETH_CALL_AND_ESTIMATE_WITH_STATE_OVERRIDE",
+  "chainId": 143,
+  "block": {
+    "chainId": 143,
+    "number": "0x6592850",
+    "hash": "0xa582f09dc794ea690aeac2a76ed76af5d1e6fad9e116e0414376fafbf0c25360",
+    "timestamp": 1789920318
+  },
+  "compiler": {
+    "version": "0.8.30+commit.73712a01.Emscripten.clang",
+    "settings": {
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "viaIR": true,
+      "evmVersion": "shanghai",
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "storageLayout",
+            "evm.bytecode.object",
+            "evm.deployedBytecode.object"
+          ]
+        }
+      }
+    },
+    "inputSha256": "67e920b3e90aa0720ff729fdf134c8d502fc62549ddf95335d8dc836b639f524"
+  },
+  "sourceSha256": {
+    "contracts/MultiPriceInventoryBase.sol": "cdd20709810dbf2e37eb53950ef41ca88dd1aee26b770d5e5dcdf927a493efd2",
+    "contracts/ContiguousMultiPriceInventory.sol": "af3c597c790c8317a2d6386179880ff53afe14724560cfee8d8efd53a6c26a96",
+    "contracts/LinkedMultiPriceInventory.sol": "287f86bf92ddda242c369837737c8b5f57b7c1e5df99e9b368f1f2b7d6ec2aec",
+    "contracts/StrictMockERC20.sol": "02a0f26c1046b64aefa82b93645bf979af90f92719760466fa0cefc7fc6674cd",
+    "@monad-ac/order-storage-preview/contracts/OrderStorageKernel.sol": "cce2e055fb84169e5d996c87edd99f116b3af60951f2ee48fd10aa74b630553e"
+  },
+  "runtimeSha256": {
+    "contiguous": "bc807e5f207ad33f26e0a2063464ab5b98b9bedd17e6087fef7099a99b271e15",
+    "linked": "8272c381090db3a035ee0ab52c679e25644193c9eeb6a4755627237235110dc2"
+  },
+  "fixture": {
+    "marketId": "0xc085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834",
+    "baseDecimals": 18,
+    "quoteDecimals": 6,
+    "baseRawPerLot": "10000000000000000",
+    "ticks": [
+      "101",
+      "102",
+      "103",
+      "104",
+      "105",
+      "106",
+      "107",
+      "108"
+    ],
+    "quoteRawPerLot": [
+      "10000",
+      "10200",
+      "10400",
+      "10600",
+      "10800",
+      "11000",
+      "11200",
+      "11400"
+    ],
+    "minimumOrderLots": "2",
+    "minimumResidualLots": "2"
+  },
+  "rows": [
+    {
+      "id": "maker-refresh-2+2-active64",
+      "activeDepth": 64,
+      "batch": 2,
+      "kind": "contiguous",
+      "readOnlyEstimate": "201446",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "232000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0xce4f66fdc085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000000000000100000002000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000660000000000000000000000000000000000000000000000000000000000000065000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002",
+      "prestateSha256": "e7161b480dbe95020b29874a337e120da4cb29015a091295fa6af955d2946b1b",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "maker-refresh-2+2-active64",
+      "activeDepth": 64,
+      "batch": 2,
+      "kind": "linked",
+      "readOnlyEstimate": "235023",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "271000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0xce4f66fdc085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000000000000100000002000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000660000000000000000000000000000000000000000000000000000000000000065000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002",
+      "prestateSha256": "ca14b1752f13ed909c1a9374ee51a4343e1489c2b0cec9cf8145ad346c2e42b6",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "maker-refresh-1+1-active256",
+      "activeDepth": 256,
+      "batch": 1,
+      "kind": "contiguous",
+      "readOnlyEstimate": "184379",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "213000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0xce4f66fdc085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000006600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+      "prestateSha256": "c13920126536db1b63c2640fb02d7a9bfaf456240a0f2fdcfef392a7a3f41df4",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "maker-refresh-1+1-active256",
+      "activeDepth": 256,
+      "batch": 1,
+      "kind": "linked",
+      "readOnlyEstimate": "179395",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "207000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0xce4f66fdc085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000006600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+      "prestateSha256": "576b6a81bc8a270b559c9d4245c035181536bc0fd6e39b8c77862202b7c53cc3",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-1-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 1,
+      "kind": "contiguous",
+      "readOnlyEstimate": "267063",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "308000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000004e200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "f26975f6219305479b24cece03d6d967d2ff65cd12b8cd4c73e1968906d771f0",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-5-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 5,
+      "kind": "contiguous",
+      "readOnlyEstimate": "359880",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "414000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000186a0000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "f26975f6219305479b24cece03d6d967d2ff65cd12b8cd4c73e1968906d771f0",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-32-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 32,
+      "kind": "contiguous",
+      "readOnlyEstimate": "1094982",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "1260000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f34383400000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000009db700000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "f26975f6219305479b24cece03d6d967d2ff65cd12b8cd4c73e1968906d771f0",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-1-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 1,
+      "kind": "linked",
+      "readOnlyEstimate": "264428",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "305000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000004e200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "7d6648fbe29cce92aed1b50cfaad187d2b5f63e5dd61ff9cc9a82ad949555de3",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-5-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 5,
+      "kind": "linked",
+      "readOnlyEstimate": "393634",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "453000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000186a0000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "7d6648fbe29cce92aed1b50cfaad187d2b5f63e5dd61ff9cc9a82ad949555de3",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    },
+    {
+      "id": "taker-32-fill-active33",
+      "activeDepth": 33,
+      "fillCount": 32,
+      "kind": "linked",
+      "readOnlyEstimate": "1373872",
+      "minimumSuccessLimit": "N/A_NOT_SEARCHED",
+      "suggestedLimit": "1580000",
+      "suggestedLimitValidatedAtSamePrestate": true,
+      "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f34383400000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000009db700000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000006ab0124e",
+      "prestateSha256": "7d6648fbe29cce92aed1b50cfaad187d2b5f63e5dd61ff9cc9a82ad949555de3",
+      "rawPrestateLocation": "rpc-raw.json (stateOverrides in the matching request)"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "maker-refresh-2+2-active64",
+      "equivalence": "PASS_LOCAL_ASSERTIONS",
+      "contiguousEstimate": "201446",
+      "linkedEstimate": "235023",
+      "contiguousVsLinkedPercent": -14.28,
+      "result": "CONTIGUOUS_LOWER",
+      "contiguousSuggestedLimit": "232000",
+      "linkedSuggestedLimit": "271000",
+      "suggestedLimitDelta": "-39000",
+      "actualSubmittedLimit": "N/A_READ_ONLY",
+      "receiptGasUsed": "N/A_READ_ONLY",
+      "actualCharge": "N/A_READ_ONLY"
+    },
+    {
+      "id": "maker-refresh-1+1-active256",
+      "equivalence": "PASS_LOCAL_ASSERTIONS",
+      "contiguousEstimate": "184379",
+      "linkedEstimate": "179395",
+      "contiguousVsLinkedPercent": 2.77,
+      "result": "CONTIGUOUS_HIGHER",
+      "contiguousSuggestedLimit": "213000",
+      "linkedSuggestedLimit": "207000",
+      "suggestedLimitDelta": "6000",
+      "actualSubmittedLimit": "N/A_READ_ONLY",
+      "receiptGasUsed": "N/A_READ_ONLY",
+      "actualCharge": "N/A_READ_ONLY"
+    },
+    {
+      "id": "taker-1-fill-active33",
+      "equivalence": "PASS_LOCAL_ASSERTIONS",
+      "contiguousEstimate": "267063",
+      "linkedEstimate": "264428",
+      "contiguousVsLinkedPercent": 0.99,
+      "result": "CONTIGUOUS_HIGHER",
+      "contiguousSuggestedLimit": "308000",
+      "linkedSuggestedLimit": "305000",
+      "suggestedLimitDelta": "3000",
+      "actualSubmittedLimit": "N/A_READ_ONLY",
+      "receiptGasUsed": "N/A_READ_ONLY",
+      "actualCharge": "N/A_READ_ONLY"
+    },
+    {
+      "id": "taker-5-fill-active33",
+      "equivalence": "PASS_LOCAL_ASSERTIONS",
+      "contiguousEstimate": "359880",
+      "linkedEstimate": "393634",
+      "contiguousVsLinkedPercent": -8.57,
+      "result": "CONTIGUOUS_LOWER",
+      "contiguousSuggestedLimit": "414000",
+      "linkedSuggestedLimit": "453000",
+      "suggestedLimitDelta": "-39000",
+      "actualSubmittedLimit": "N/A_READ_ONLY",
+      "receiptGasUsed": "N/A_READ_ONLY",
+      "actualCharge": "N/A_READ_ONLY"
+    },
+    {
+      "id": "taker-32-fill-active33",
+      "equivalence": "PASS_LOCAL_ASSERTIONS",
+      "contiguousEstimate": "1094982",
+      "linkedEstimate": "1373872",
+      "contiguousVsLinkedPercent": -20.29,
+      "result": "CONTIGUOUS_LOWER",
+      "contiguousSuggestedLimit": "1260000",
+      "linkedSuggestedLimit": "1580000",
+      "suggestedLimitDelta": "-320000",
+      "actualSubmittedLimit": "N/A_READ_ONLY",
+      "receiptGasUsed": "N/A_READ_ONLY",
+      "actualCharge": "N/A_READ_ONLY"
+    }
+  ],
+  "staleCounterexample": {
+    "id": "stale-preflight-split-head",
+    "kind": "contiguous",
+    "calldata": "0x5edc404ec085ca7d6bbc34ea83c4d67c807f586b7750abf6f2b5090758e3f33b6f343834000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000018e70000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000006ab0124e",
+    "quotedPrestateSha256": "f353476bf00ffea02bff03bd4bfa38c8a2329bce5d542a2f6b95138ed8cc6b7c",
+    "inclusionPrestateSha256": "7800bee218499a1e67f060679e65d27618859e173749e5d787c5ab844c4b5a23",
+    "quotedEstimate": "268792",
+    "quotedSuggestedLimit": "310000",
+    "oldLimitSucceededAfterBookChange": false,
+    "oldLimitError": "out of gas",
+    "changedStateEstimate": "359548",
+    "stateChanged": true
+  },
+  "rpcAccounting": {
+    "requests": 63,
+    "cap": 100,
+    "transactionsSent": 0
+  },
+  "metricDefinitions": {
+    "readOnlyEstimate": "eth_estimateGas at the pinned state; not receipt gas",
+    "minimumSuccessLimit": "N/A; binary minimum was not searched",
+    "suggestedLimit": "ceil(readOnlyEstimate * 1.15 / 1000) * 1000, validated only at the identical prestate",
+    "submittedLimit": "N/A; no transaction was submitted",
+    "receiptFee": "N/A; no receipt exists"
+  },
+  "notClaimed": [
+    "page locality as sole cause",
+    "Kuru advantage",
+    "TPS",
+    "receipt gas",
+    "actual fee saving",
+    "universal safe gas limit"
+  ],
+  "durationMs": 14432
+}

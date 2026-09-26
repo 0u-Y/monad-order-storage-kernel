@@ -16,6 +16,10 @@ npm run demo:metropolis
 # Audit hashes and arithmetic in the compact recorded evidence
 npm run evidence:metropolis
 
+# Slower optional path: local contiguous/linked differential checks plus
+# chain-143 fixed-block read-only regeneration (no transaction)
+npm run benchmark:judge
+
 # Optional read-only RPC check of the historical public testnet deployment
 npm run replay:testnet
 ```
@@ -25,7 +29,7 @@ npm run replay:testnet
 | Claim | Source and fixture | Public command | Public raw evidence | Scope and limit |
 |---|---|---|---|---|
 | FIFO storage and atomic `Fill[]` settlement work through a host | `contracts/OrderStorageKernel.sol`; `examples/multi-price/contracts/*`; ephemeral BASE18/QUOTE6 fixture | `npm test` or `npm run demo:metropolis` | Terminal JSON from `scripts/metropolis-demo.cjs`; assertions in `test/kernel.cjs` | Local correctness only; self-authored mock and no audit |
-| Selected 2+2/5/32 states estimate below linked, while 1-fill and deep 1+1 regress | Research comparison intended the same host policy; linked source at `evidence/baselines/LinkedMultiPriceInventory.sol`; chain 143 block `0x6592850`; solc 0.8.30/viaIR/200/Shanghai | `npm run evidence:metropolis` | `evidence/metropolis_claims.json` → `fixedBlockReadOnly` | Command checks hashes and stored arithmetic only. It does not regenerate state overrides or independently prove linked semantic equivalence; no receipt or universal fee claim |
+| Selected 2+2/5/32 states estimate below linked, while 1-fill and deep 1+1 regress | Same host policy; linked source at `evidence/baselines/LinkedMultiPriceInventory.sol`; chain 143 block `0x6592850`; solc 0.8.30/viaIR/200/Shanghai | `npm run benchmark:judge` | generated `benchmark/output/{local,monad-ten,rpc-raw,summary}.json`; recorded snapshot under `evidence/judge-benchmark-20260926/` | Regenerates explicit state overrides and read-only estimates after five local differential assertions. No transaction, receipt, fee, independent audit, or universal limit claim |
 | Public eight-tick mock flow has accessible successful receipts and current zero host escrow | Chain 10143 host `0xF33F…8709`, 19 transaction hashes | `npm run replay:testnet` | `evidence/metropolis_claims.json` → `publicTestnetExecution`; explorer receipts | Checks nonempty code, receipt status/limits, aggregates, and current host balances. No runtime hash, immutables, event order, historical actor balances, or linked comparison |
 
 ## Negative-evidence map
@@ -67,7 +71,7 @@ calculation rules are public in `evidence/metropolis_claims.json`.
 
 - External integrator demand: **UNVERIFIED**.
 - General ERC-20 compatibility and production custody: **UNVERIFIED**.
-- Historical fixed-block estimates regenerated solely from the public repo:
-  **NOT PROVIDED**; the research state-override harness has additional fixture
-  dependencies and remote-call volume unsuitable for the 15-minute path.
+- Fixed-block replay depends on the public Monad RPC retaining historical state
+  and supporting `debug_traceCall` state overrides. When either is unavailable,
+  the command records **BLOCKED** instead of substituting the stored values.
 - Historical native results as present MonadTen evidence: **EXCLUDED**.

@@ -1,0 +1,14 @@
+{
+  "name": "order-storage-kernel-judge-benchmark",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "judge": "node judge.cjs"
+  },
+  "dependencies": {
+    "@monad-ac/order-storage-preview": "file:../order-storage-preview.tgz",
+    "ethers": "6.17.0",
+    "ganache": "7.9.2",
+    "solc": "0.8.30"
+  }
+}
